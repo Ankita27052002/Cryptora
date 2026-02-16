@@ -11,6 +11,11 @@ import { removeItemToWatchlist } from "../../../functions/removeItemToWatchlist"
 function Grid({ coin, delay }) {
   const watchlist = JSON.parse(localStorage.getItem("watchlist"));
   const [isCoinAdded, setIsCoinAdded] = useState(watchlist?.includes(coin.id));
+  const formatPercent = (value) =>
+    new Intl.NumberFormat("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(value);
 
   return (
     <a href={`/coin/${coin.id}`}>
@@ -49,7 +54,7 @@ function Grid({ coin, delay }) {
         {coin.price_change_percentage_24h >= 0 ? (
           <div className="chip-flex">
             <div className="price-chip">
-              {coin.price_change_percentage_24h.toFixed(2)}%
+              {formatPercent(coin.price_change_percentage_24h)}%
             </div>
             <div className="chip-icon">
               <TrendingUpRoundedIcon />
@@ -58,7 +63,7 @@ function Grid({ coin, delay }) {
         ) : (
           <div className="chip-flex">
             <div className="price-chip red">
-              {coin.price_change_percentage_24h.toFixed(2)}%
+              {formatPercent(coin.price_change_percentage_24h)}%
             </div>
             <div className="chip-icon red">
               <TrendingDownRoundedIcon />

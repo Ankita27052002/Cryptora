@@ -18,11 +18,6 @@ function Dashboard() {
   const [page, setPage] = useState(1);
   const [paginatedCoins, setPaginatedCoins] = useState([]);
 
-  useEffect(() => {
-    // Get 100 Coins
-    getData();
-  }, []);
-
   const getData = () => {
     setLoading(true);
     setError(false);
@@ -40,6 +35,11 @@ function Dashboard() {
         setError(true);
       });
   };
+  
+  useEffect(() => {
+    // Get 100 Coins
+    getData();
+  }, []);
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -84,7 +84,7 @@ function Dashboard() {
               margin: "2rem",
             }}
           >
-            <Button text="Retry" onClick={getData} />
+            <Button text="Retry" />
           </div>
         </div>
       ) : (
